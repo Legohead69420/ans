@@ -15,7 +15,7 @@ def sendEmail(to, content):
     server.ehlo()
     server.starttls()
     # Enable low security in gmail
-    server.login('edugabri1217@gmail.com', 'euxqsquafrfzrngs')
+    server.login('edugabri1217@gmail.com', 'Input app password')
     server.sendmail('edugabri1217@gmail.com', to, content)
     server.close()
 def listConvert(string):
