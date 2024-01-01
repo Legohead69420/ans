@@ -19,6 +19,7 @@ def __main__():
     print('Opened shell instance')
     while True:
         cmd = input(Fore.RESET+f"PS {__file__.replace(r'\powershell.py', '> ')}"+Fore.YELLOW)
+        print(Fore.RESET)
         if cmd == 'reload':
             os.system(f'python {__file__}')
         elif cmd == 'exit':
