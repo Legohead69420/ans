@@ -15,7 +15,7 @@ parent_pid = os.getppid()
 init()
 cls2 = lambda: os.system('cls' if os.name == 'nt' else 'clear')
 # Set terminal level for ANSI code usage
-os.system(r"pwsh -Command Set-ItemProperty HKCU:\Console VirtualTerminalLevel -Type DWORD 1")
+os.system(r"powershell -Command Set-ItemProperty HKCU:\Console VirtualTerminalLevel -Type DWORD 1")
 cls1 = lambda: print('\033[12A\033[2K', end='')
 cls2()
 def sendEmail(to, content):
