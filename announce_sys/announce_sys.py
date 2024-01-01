@@ -1,6 +1,7 @@
 import smtplib
 import time
-from colorama import init, Fore, Back
+from colorama import init
+from colorama import Fore as FG
 import os
 import shutil
 import subprocess
@@ -29,10 +30,11 @@ def sendEmail(to, content):
 def listConvert(string):
     out = str(string).split(",")
     return out
+inputfunc = ''
 while True:
-    print(Fore.LIGHTBLUE_EX+'╭'+'Put "help" in the console to view the list of commands'.center(columns-1, '─'))
-    inputfunc = input("╰───Input action: "+Fore.YELLOW,)
-    print(Fore.LIGHTBLUE_EX)
+    print(FG.LIGHTBLUE_EX+'╭'+'Type "help" in the console to view the list of commands'.center(columns-2, '─')+'╯')
+    inputfunc = input("╰───Input action: "+FG.YELLOW,)
+    print(FG.LIGHTBLUE_EX)
     cls1()
     if "announce" in inputfunc:
         cls2()
@@ -41,7 +43,7 @@ while True:
             for mail in maillist:
                 to = listConvert(mail)
                 sendEmail(to, announcecontent)
-                print("Announcement sent!".center(columns, '=') + Fore.WHITE)
+                print("Announcement sent!".center(columns, '=') + FG.WHITE)
                 time.sleep(1.0)
                 cls1()
     elif "add" in inputfunc:
@@ -53,34 +55,33 @@ while True:
                 with open("maillist.txt", "a") as maillist:
                     maillist.write(f"{added}")
                     cls2()
-                    print(f"Added {added} to the email whitelist!".center(columns, '=')+Fore.WHITE)
+                    print(f"Added {added} to the email whitelist!".center(columns, '=')+FG.WHITE)
                     time.sleep(1.0)
                     cls1()
             else:
                 with open("maillist.txt", "a") as maillist:
                     maillist.write(f", {added}")
-                    print(f"Added {added} to the email whitelist!".center(columns, '=')+Fore.WHITE)
+                    print(f"Added {added} to the email whitelist!".center(columns, '=')+FG.WHITE)
                     time.sleep(1.0)
                     cls1()
     elif "removelist" in inputfunc:
         with open("maillist.txt", "w") as remove:
             remove.write("")
             cls2()
-            print("Removed email whitelist!".center(columns, '=')+Fore.WHITE)
+            print("Removed email whitelist!".center(columns, '=')+FG.WHITE)
             time.sleep(1.0)
             cls1()
     elif "exit" in inputfunc:
         cls1()
         keyboard.send('ctrl+c')
-        print(Fore.RED+"Exiting DO NOT PRESS ANYTHING DUE TO KEYBOARD INTERUPT".center(columns, "=")+Fore.WHITE)
+        print(FG.RED+"Exiting DO NOT PRESS ANYTHING DUE TO KEYBOARD INTERRUPT".center(columns, "=")+FG.WHITE)
         time.sleep(0.1)
         cls1()
     elif "help" in inputfunc:
         cmdlist1 = ["1. exit | Exits the program", "2. announce | Announces something", "3. add | Adds a email address to the email whitelist", "4. removelist | Removes the email whitelist", "5. cls | Clears output", "6. shell | Opens a powershell instance using subprocess for debugging"]
         lengths = []
         for item in cmdlist1:
-            length = len(item)
-            lengths.append(length)
+            lengths.append(len(item))
         cmdlist2 = []
         for item in cmdlist1:
             spaces = max(lengths) - len(item)
@@ -88,23 +89,26 @@ while True:
             for i in range(spaces):
                 space = space+' '
             cmdlist2.append(f'{item}{space}')
-        cls1()
+        cls2()
         out = ''
         for item in cmdlist2:
             for item1 in [*item]:
-                time.sleep(0.007)
+                time.sleep(0.009)
                 out = out + item1
                 cls1()
-                print(Fore.GREEN+"Command list".center(columns, '─'))
+                print(FG.LIGHTBLUE_EX+'╭'+"Command list".center(columns-2, '─')+'╯'+FG.GREEN)
                 if cmdlist2.index(item) >= 1:
                     for i in range(cmdlist2.index(item)):
-                        print(str(cmdlist2[i]).center(columns))
+                        print(FG.LIGHTBLUE_EX+'│'+FG.GREEN+str(cmdlist2[i]).center(columns-1))
                 spaces = max(lengths) - len(out)
                 space = ''
                 for i in range(spaces):
                     space = space+' '
-                print(str(out+space).center(columns))
-                print("Command list".center(columns, '─'))
+                print(FG.LIGHTBLUE_EX+'│'+FG.GREEN+str(out+space).center(columns-1))
+                if cmdlist2.index(item) == len(cmdlist2)-1:
+                    print(FG.LIGHTBLUE_EX+'╰'+"Command list".center(columns-2, '─')+'╮')
+                else:
+                    print(FG.LIGHTBLUE_EX+'╰'+"Command list".center(columns-2, '─')+'─')
             out = ''
     elif "reload" in inputfunc:
         cls2()
@@ -112,7 +116,7 @@ while True:
         time.sleep(1.0)
         os.system('exit')
         os.system(f'python {__file__}')
-        print(Fore.WHITE)
+        print(FG.WHITE)
     elif "cls" in inputfunc:
         cls2()
     elif "shell" in inputfunc:
@@ -120,4 +124,4 @@ while True:
         __main__()
     else:
         cls2()
-        print(Fore.RED + "Invalid option."+Fore.CYAN+" Type 'shell' to run commands into shell" + Fore.LIGHTBLUE_EX)
+        print(FG.RED + "Invalid option."+FG.CYAN+" Type 'shell' to run commands into shell" + FG.LIGHTBLUE_EX)
