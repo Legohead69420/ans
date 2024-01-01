@@ -14,10 +14,9 @@ userdir = os.getenv("UserName")
 parent_pid = os.getppid()
 init()
 cls2 = lambda: os.system('cls' if os.name == 'nt' else 'clear')
-if psutil.Process(parent_pid).name() == 'powershell.exe':
-    cls1 = lambda: os.system('cls' if os.name == 'nt' else 'clear')
-else:
-    cls1 = lambda: print('\033[12A\033[2K', end='')
+# Set terminal level for ANSI code usage
+os.system('Set-ItemProperty HKCU:\Console VirtualTerminalLevel -Type DWORD 1')
+cls1 = lambda: print('\033[12A\033[2K', end='')
 cls2()
 def sendEmail(to, content):
     server = smtplib.SMTP('smtp.gmail.com', 587)
