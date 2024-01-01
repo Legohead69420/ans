@@ -31,8 +31,9 @@ def listConvert(string):
     out = str(string).split(",")
     return out
 while True:
-    print(Fore.LIGHTBLUE_EX+'\n╭'+'Put "help" in the console to view the list of commands'.center(columns-1, '─'))
-    inputfunc = input("╰───Input action: ")
+    print(Fore.LIGHTBLUE_EX+'╭'+'Put "help" in the console to view the list of commands'.center(columns-1, '─'))
+    inputfunc = input("╰───Input action: "+Fore.YELLOW,)
+    print(Fore.LIGHTBLUE_EX)
     cls1()
     if "announce" in inputfunc:
         cls2()
@@ -116,7 +117,8 @@ while True:
     elif "cls" in inputfunc:
         cls2()
     elif "shell" in inputfunc:
-        from announce_sys.powershell import __main__
+        from powershell import __main__
         __main__()
     else:
-        print(Fore.RED + "Invalid option" + Fore.LIGHTBLUE_EX)
+        cls2()
+        print(Fore.RED + "Invalid option."+Fore.CYAN+" Type 'shell' to run commands into shell" + Fore.LIGHTBLUE_EX)

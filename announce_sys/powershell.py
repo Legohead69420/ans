@@ -1,28 +1,28 @@
 def __main__():
     import os
-    import keyboard
-    from time import sleep
     from pylogger.operators import cls
     import subprocess
     from colorama import init, Fore, Back
 
     cls()
+    init()
     hf = 'history.log'
     def run(cmd):
         os.system(cmd)
     history = open(hf, 'r').read()
-    na = ['reload', 'exit', 'donut']
     print(history)
     if history == '':
         pass
     else:
         print(Back.WHITE+Fore.BLACK+' * '+Back.LIGHTBLUE_EX+Fore.BLACK+' History Restored '+Fore.RESET+Back.RESET+'\n\n')
         open(hf, 'w').write('')
+    print('Opened shell instance')
     while True:
-        cmd = input(f"PS {__file__.replace(r'\powershell.py', '> ')}")
+        cmd = input(Fore.RESET+f"PS {__file__.replace(r'\powershell.py', '> ')}"+Fore.YELLOW)
         if cmd == 'reload':
             os.system(f'python {__file__}')
         elif cmd == 'exit':
+            cls()
             return None
         else:
             run(cmd)
