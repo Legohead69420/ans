@@ -18,7 +18,7 @@ if psutil.Process(parent_pid).name() == 'powershell.exe':
     cls1 = lambda: os.system('cls' if os.name == 'nt' else 'clear')
 else:
     cls1 = lambda: print('\033[12A\033[2K', end='')
-cls1()
+cls2()
 def sendEmail(to, content):
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.ehlo()
