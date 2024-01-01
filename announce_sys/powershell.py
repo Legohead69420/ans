@@ -10,7 +10,7 @@ def __main__():
     def run(cmd):
         os.system(cmd)
     history = open(hf, 'r').read()
-    print(history)
+    print(Fore.RESET+history)
     if history == '':
         pass
     else:
